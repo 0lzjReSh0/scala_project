@@ -10,7 +10,7 @@ object EnergyAnalyzerApp extends App {
   val alertSystem = new AlertSystem
 
   var running = true
-  val hourlyData = DataStorage.readDataFromCSV("E:\\javaidea\\scala_project-master\\src\\main\\scala\\com\\energy_data.csv")
+  val hourlyData = DataStorage.readDataFromCSV("src/main/scala/com/energy_data.csv")
 
   while (running) {
     println("Welcome to the Renewable Energy System. Please select an option:")
@@ -39,7 +39,7 @@ object EnergyAnalyzerApp extends App {
 
       case 3 =>
         // Read data
-        val readData = DataStorage.readDataFromCSV("E:\\javaidea\\scala_project-master\\src\\main\\scala\\com\\energy_data.csv")
+        val readData = DataStorage.readDataFromCSV("src/main/scala/com/energy_data.csv")
 
         // Analyze data
         val dailyData = energyAnalyzer.analyzeHourlyData(readData)
@@ -51,7 +51,7 @@ object EnergyAnalyzerApp extends App {
 
       case 4 =>
         // Read data
-        val readData = DataStorage.readDataFromCSV("E:\\javaidea\\scala_project-master\\src\\main\\scala\\com\\energy_data.csv")
+        val readData = DataStorage.readDataFromCSV("src/main/scala/com/energy_data.csv")
         // Analyze data
         val dailyData = energyAnalyzer.analyzeHourlyData(readData)
         val weeklyData = energyAnalyzer.analyzeDailyData(dailyData)
