@@ -2,7 +2,6 @@ package com.models
 
 trait EnergySource {
   def id: String
-  def capacity: Double
   def status: String
 }
 

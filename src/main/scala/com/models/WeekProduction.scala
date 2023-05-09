@@ -1,3 +1,5 @@
 package com.models
 
-final case class WeekProduction(val time: Long, val energy: Double) extends Production
+final case class WeekProduction(week:Long, energy:Double) {
+
+}

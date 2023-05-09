@@ -1,3 +1,5 @@
 package com.models
 
-final case class MonthProduction(val time: Long, val energy: Double) extends Production
+final case class MonthProduction(month:Long, energy:Double) {
+
+}
