@@ -1,11 +1,12 @@
 package com.view
 
+import com.models.Production
 import com.models.MonthProduction
+import com.models.WeekProduction
 
 object DataView {
 
-  def showData(data: Seq[MonthProduction]): Unit = {
-    data.foreach(record => println(s"Month: ${record.month}, Energy: ${record.energy}"))
+  def showData(data: Seq[Production]): Unit = {
+    data.foreach(record => println(s"Time: ${record.time}, Energy: ${record.energy}"))
   }
-
 }

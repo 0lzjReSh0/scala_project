@@ -1,5 +1,4 @@
 package com.models
+import com.models.Production
 
-final case class DailyProduction(day:Long, energy:Double) {
-
-}
+final case class DailyProduction(val time: Long, val energy: Double) extends Production

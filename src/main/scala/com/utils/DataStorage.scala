@@ -9,7 +9,7 @@ object DataStorage {
 
   def saveData(data: Seq[HourProduction], filePath: String = "hourlyData.txt"): Unit = {
     val writer = new PrintWriter(new File(filePath))
-    data.foreach{record => writer.write(s"${record.hour},${record.energy}\n")}
+    data.foreach{record => writer.write(s"${record.time},${record.energy}\n")}
     writer.close()
   }
 
