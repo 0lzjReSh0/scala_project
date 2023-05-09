@@ -13,7 +13,6 @@ object EnergyAnalyzerApp extends App {
     HourProduction(hour = 1629504000000L, energy = 190),
     HourProduction(hour = 1629500400000L, energy = 200),
     HourProduction(hour = 1629504000000L, energy = 250),
-
   )
 
 
