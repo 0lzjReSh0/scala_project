@@ -44,36 +44,44 @@ object EnergyAnalyzerApp extends App {
         println("Enter file name")
         val fileName = scala.io.StdIn.readLine()
         // Read data
-        val readData = DataStorage.readDataFromCSV(fileName)
-
-        // Analyze data
-        val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
-        val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
-        val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
-
-        // Show data
-        DataView.showData(monthlyData)
+        try {
+          val readData = DataStorage.readDataFromCSV(fileName)
+  
+          // Analyze data
+          val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
+          val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
+          val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
+  
+          // Show data
+          DataView.showData(monthlyData)
+        } catch {
+          case t: Throwable => println(s"${t}") 
+        }
 
       case 4 =>
         println("Enter file name")
         val fileName = scala.io.StdIn.readLine()
         // Read data
-        val readData = DataStorage.readDataFromCSV(fileName)
-
-        // Analyze data
-        val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
-        val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
-        val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
-
-        // Show data
-        DataView.showData(monthlyData)
-
-        // Analyze data
-        println(s"Mean: ${energyAnalyzer.mean(monthlyData.map(_.energy))}")
-        println(s"Median: ${energyAnalyzer.median(monthlyData.map(_.energy))}")
-        println(s"Mode: ${energyAnalyzer.mode(monthlyData.map(_.energy))}")
-        println(s"Range: ${energyAnalyzer.range(monthlyData.map(_.energy))}")
-        println(s"Midrange: ${energyAnalyzer.midrange(monthlyData.map(_.energy))}")
+        try {
+          val readData = DataStorage.readDataFromCSV(fileName)
+  
+          // Analyze data
+          val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
+          val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
+          val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
+  
+          // Show data
+          DataView.showData(monthlyData)
+  
+          // Analyze data
+          println(s"Mean: ${energyAnalyzer.mean(monthlyData.map(_.energy))}")
+          println(s"Median: ${energyAnalyzer.median(monthlyData.map(_.energy))}")
+          println(s"Mode: ${energyAnalyzer.mode(monthlyData.map(_.energy))}")
+          println(s"Range: ${energyAnalyzer.range(monthlyData.map(_.energy))}")
+          println(s"Midrange: ${energyAnalyzer.midrange(monthlyData.map(_.energy))}")
+        } catch {
+          case t: Throwable => println(s"${t}") 
+        }
 
       case 5 =>
         running = false
