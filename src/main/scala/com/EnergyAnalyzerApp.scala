@@ -47,9 +47,9 @@ object EnergyAnalyzerApp extends App {
         val readData = DataStorage.readDataFromCSV(fileName)
 
         // Analyze data
-        val dailyData = energyAnalyzer.analyzeHourlyData(readData)
-        val weeklyData = energyAnalyzer.analyzeDailyData(dailyData)
-        val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData)
+        val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
+        val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
+        val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
 
         // Show data
         DataView.showData(monthlyData)
@@ -59,10 +59,11 @@ object EnergyAnalyzerApp extends App {
         val fileName = scala.io.StdIn.readLine()
         // Read data
         val readData = DataStorage.readDataFromCSV(fileName)
+
         // Analyze data
-        val dailyData = energyAnalyzer.analyzeHourlyData(readData)
-        val weeklyData = energyAnalyzer.analyzeDailyData(dailyData)
-        val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData)
+        val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
+        val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
+        val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
 
         // Show data
         DataView.showData(monthlyData)
