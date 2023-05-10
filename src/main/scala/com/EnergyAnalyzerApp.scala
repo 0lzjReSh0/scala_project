@@ -29,17 +29,22 @@ object EnergyAnalyzerApp extends App {
 
       case 2 =>
         // Let the user input new data
-        println("Please enter the new data in the format: timestamp,equipment_id,energy_type,energy_output,equipment_status")
-        val inputData = scala.io.StdIn.readLine().split(",")
-        val newHourlyData = HourProduction(inputData(0), inputData(1).toLong, inputData(2), inputData(3).toDouble, inputData(4))
-
-        // Save data
-        DataStorage.saveData(Seq(newHourlyData))
-        println("Data saved successfully")
-
+        println("Please enter the new data in the format:\ntimestamp,equipment_id,energy_type,energy_output,equipment_status")
+        val inputString = scala.io.StdIn.readLine()
+        try {
+          val inputData = inputString.split(",")
+          val newHourlyData = HourProduction(inputData(0), inputData(1).toLong, inputData(2), inputData(3).toDouble, inputData(4))
+          // Save data
+          DataStorage.saveData(Seq(newHourlyData))
+          println("Data saved successfully")
+        } catch {
+          case t: Throwable => println("Invalid Input") 
+        }
       case 3 =>
+        println("Enter file name")
+        val fileName = scala.io.StdIn.readLine()
         // Read data
-        val readData = DataStorage.readDataFromCSV("src/main/scala/com/energy_data.csv")
+        val readData = DataStorage.readDataFromCSV(fileName)
 
         // Analyze data
         val dailyData = energyAnalyzer.analyzeHourlyData(readData)
@@ -50,8 +55,10 @@ object EnergyAnalyzerApp extends App {
         DataView.showData(monthlyData)
 
       case 4 =>
+        println("Enter file name")
+        val fileName = scala.io.StdIn.readLine()
         // Read data
-        val readData = DataStorage.readDataFromCSV("src/main/scala/com/energy_data.csv")
+        val readData = DataStorage.readDataFromCSV(fileName)
         // Analyze data
         val dailyData = energyAnalyzer.analyzeHourlyData(readData)
         val weeklyData = energyAnalyzer.analyzeDailyData(dailyData)
