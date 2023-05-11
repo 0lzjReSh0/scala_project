@@ -1,6 +1,7 @@
 package com
 
 import com.models.HourProduction
+import com.models.DataViewer
 import com.services.{AlertSystem, EnergyAnalyzer}
 import com.utils.DataStorage
 import com.view.DataView
@@ -56,7 +57,7 @@ object EnergyAnalyzerApp extends App {
           // Show data
           DataView.showData(monthlyData)
         } catch {
-          case t: Throwable => println(s"${t}") 
+          case t: Throwable => println(t) 
         }
 
       case 4 =>
@@ -81,13 +82,19 @@ object EnergyAnalyzerApp extends App {
           println(s"Range: ${energyAnalyzer.range(monthlyData.map(_.energy))}")
           println(s"Midrange: ${energyAnalyzer.midrange(monthlyData.map(_.energy))}")
         } catch {
-          case t: Throwable => println(s"${t}") 
+          case t: Throwable => println(t) 
         }
       
       case 5 =>
-        println("Enter file name")
+        var exit = false
+        println("Enter file path")
         val fileName = scala.io.StdIn.readLine()
-        DataView.showAlternatively(fileName)
+        try {
+          val dataCollection: Seq[DataViewer] = DataStorage.loadToViewer(fileName)
+          DataView.showOption(dataCollection)
+        } catch {
+          case t: Throwable => println(t)
+        }
 
       case 0 =>
         running = false
