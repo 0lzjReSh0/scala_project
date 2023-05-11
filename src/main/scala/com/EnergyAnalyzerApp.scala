@@ -18,7 +18,8 @@ object EnergyAnalyzerApp extends App {
     println("2. Save new hourly data")
     println("3. View energy data")
     println("4. Analyze energy data")
-    println("5. Exit")
+    println("5. Show alternatively")
+    println("0. Exit")
 
     val option = scala.io.StdIn.readInt()
 
@@ -82,8 +83,13 @@ object EnergyAnalyzerApp extends App {
         } catch {
           case t: Throwable => println(s"${t}") 
         }
-
+      
       case 5 =>
+        println("Enter file name")
+        val fileName = scala.io.StdIn.readLine()
+        DataView.showAlternatively(fileName)
+
+      case 0 =>
         running = false
 
       case _ => println("Invalid option")

@@ -14,8 +14,7 @@ object DataStorage {
     bufferedSource.close()
     data
   }
-
-
+  
   def saveData(data: Seq[HourProduction], filePath: String = "hourlyData.csv"): Unit = {
     val writer = new PrintWriter(new File(filePath))
     data.foreach { record =>
