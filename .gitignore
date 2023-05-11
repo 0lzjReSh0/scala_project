@@ -135,4 +135,5 @@ project/plugins/project/
 
 .vscode
 .bloop
+.idea
 null
