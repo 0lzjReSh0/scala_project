@@ -23,6 +23,11 @@ class EnergyAnalyzer {
 //       .map { case (month, data) => MonthProduction(month, data.map(_.energy).sum) }
 //       .toSeq
 //   }
+def analyzeViewerData(data: Seq[DataViewer]): Seq[DataViewer] = {
+  // Your code to analyze the data
+  // This is just an example, you will need to replace it with your own code
+  data.map(record => record.copy(energy = record.energy * 2))
+}
 
   def analyze[T <: EnergySource, R <: EnergySource](
     data: Seq[T],

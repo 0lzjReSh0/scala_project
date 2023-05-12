@@ -10,5 +10,6 @@ object DataStorage {
     // Implement data reading here
     Seq.empty
   }
+
 }
 
