@@ -1,11 +1,12 @@
 package com.utils
 
 import com.models.HourProduction
-import java.io.{File, PrintWriter}
+
+import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
 import scala.io.Source
 import com.models.DataViewer
+
 import java.text.SimpleDateFormat
-import java.io.{File, FileWriter}
 object DataStorage {
   def readDataFromCSV(filePath: String): Seq[HourProduction] = {
     val bufferedSource = Source.fromFile(filePath)
@@ -39,15 +40,27 @@ object DataStorage {
 
   def loadToViewer(filePath: String): Seq[DataViewer] = {
     val bufferedSource = Source.fromFile(filePath)
+    val writer = new BufferedWriter(new FileWriter("src/main/scala/com/energy_data_time.csv"))
+
+    // write header
+    writer.write("equipment_id,timestamp,energy_type,energy_output,equipment_status\n")
+
     val data = bufferedSource.getLines().drop(1).map(e => {
       println(s"Reading line: $e") // debug line
       val line = e.split(",")
       val status = if (line(4) == "operational") true else false
-      val viewer = new DataViewer(line(0), new SimpleDateFormat("YYYY-MM-dd HH:mm").format(line(1).toLong), line(2), line(3).toInt, status)
+      val viewer = new DataViewer(line(0), new SimpleDateFormat("YYYY-MM-dd HH:mm").format(line(1).toLong), line(2), line(3).toDouble, status)
+
+      // write data
+      writer.write(s"${viewer.equipment},${viewer.datetime},${viewer.energy_type},${viewer.energy},${if (viewer.status) "operational" else "non-operational"}\n")
+
       println(s"Created DataViewer: $viewer") // debug line
       viewer
     }).toSeq
+
     bufferedSource.close()
+    writer.close() // make sure to close the writer after you're done
+
     data
   }
 

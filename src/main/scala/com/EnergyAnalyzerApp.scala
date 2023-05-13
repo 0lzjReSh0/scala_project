@@ -58,9 +58,9 @@ object EnergyAnalyzerApp extends App {
         var continue = true
         println("Enter the file name")
         val fileName = scala.io.StdIn.readLine()
-        val readData = DataStorage.readDataFromCSV(fileName)
-        while (continue) {
 
+        while (continue) {
+          val readData = DataStorage.readDataFromCSV(fileName)
 
         println("Please select an option:")
         println("1. Filter by energy type")

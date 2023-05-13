@@ -1,4 +1,4 @@
-equipment_id,datetime,energy_type,energy_amount,status
+equipment_id,timestamp,energy_type,energy_output,equipment_status
 SP1,2021-08-21 02:00,solar,150.0,operational
 SP1,2021-08-21 03:00,solar,170.0,operational
 WT1,2021-08-21 13:00,wind,180.0,operational
@@ -22,5 +22,7 @@ SP4,2021-08-29 19:20,solar,330.0,operational
 WT4,2021-08-30 08:06,wind,340.0,operational
 WT4,2021-08-30 19:13,wind,350.0,operational
 HP4,2021-08-31 11:53,hydro,360.0,operational
+HP4,2021-08-31 23:00,hydro,380.0,operational
+HP4,2021-08-31 23:00,hydro,380.0,operational
 HP4,2021-08-31 23:00,hydro,380.0,operational
 HP4,2021-08-31 23:00,hydro,380.0,operational

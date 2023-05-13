@@ -98,8 +98,10 @@ object DataView {
   }
 
   def showSortedData(data: Seq[HourProduction]): Unit = {
-    data.foreach(record => println(s"Hour: ${record.hour}, Energy: ${record.energy}"))
+    val sortedData = data.sortWith(_.energy < _.energy)
+    sortedData.foreach(record => println(s"Hour: ${record.hour}, Energy: ${record.energy}"))
   }
+
 
   def showSearchResults(data: Seq[HourProduction], keyword: String): Unit = {
     val results = data.filter(d => d.energy_type.contains(keyword) || d.equipment_id.contains(keyword))
