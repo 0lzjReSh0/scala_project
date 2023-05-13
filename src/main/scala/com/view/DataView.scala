@@ -8,6 +8,7 @@ import com.models.RecordFilter
 import java.io.PrintWriter
 import java.io.File
 import com.utils.DataStorage
+import com.models.HourProduction
 object DataView {
   def showData(data: Seq[MonthProduction]): Unit = {
     data.foreach(record => println(s"Month: ${record.month}, Energy: ${record.energy}"))
@@ -41,7 +42,7 @@ object DataView {
       case 5 =>
         println("Enter equipment id, datetime, energy type, energy amount and status (separated by commas)")
         val recordData = scala.io.StdIn.readLine().split(",")
-        val newRecord = new DataViewer(recordData(0), recordData(1), recordData(2), recordData(3).toInt, recordData(4) == "operational")
+        val newRecord = new DataViewer(recordData(0), recordData(1), recordData(2), recordData(3).toDouble, recordData(4) == "operational")
         val updatedRecords = addRecord(records, newRecord)
         DataStorage.saveToViewer(updatedRecords, "src/main/scala/com/energy_data_time.csv") // replace "your_file_path.csv" with your actual file path
         showOption(updatedRecords)
@@ -89,6 +90,21 @@ object DataView {
     writer.close()
   }
 
+  def showDataByEnergyType(data: Seq[HourProduction]): Unit = {
+    data.groupBy(_.energy_type).foreach { case (energyType, records) =>
+      println(s"Energy type: $energyType")
+      records.foreach(record => println(s"Hour: ${record.hour}, Energy: ${record.energy}"))
+    }
+  }
+
+  def showSortedData(data: Seq[HourProduction]): Unit = {
+    data.foreach(record => println(s"Hour: ${record.hour}, Energy: ${record.energy}"))
+  }
+
+  def showSearchResults(data: Seq[HourProduction], keyword: String): Unit = {
+    val results = data.filter(d => d.energy_type.contains(keyword) || d.equipment_id.contains(keyword))
+    results.foreach(record => println(s"Hour: ${record.hour}, Energy: ${record.energy}"))
+  }
 
   def recordsFilter(records: Seq[DataViewer],filter: RecordFilter): Unit = {
     println("\n|Equipment ID|DateTime|Energy Type|Energy Amount|Status|")

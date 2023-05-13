@@ -55,22 +55,47 @@ object EnergyAnalyzerApp extends App {
         }
 
       case 4 =>
-        println("Enter file name")
+        var continue = true
+        println("Enter the file name")
         val fileName = scala.io.StdIn.readLine()
-        try {
-          val readData = DataStorage.readDataFromCSV(fileName)
-          val dailyData = energyAnalyzer.analyzeHourlyData(readData, energyAnalyzer.analyze)
-          val weeklyData = energyAnalyzer.analyzeDailyData(dailyData, energyAnalyzer.analyze)
-          val monthlyData = energyAnalyzer.analyzeWeeklyData(weeklyData, energyAnalyzer.analyze)
-          DataView.showData(monthlyData)
-          println(s"Mean: ${energyAnalyzer.mean(monthlyData.map(_.energy))}")
-          println(s"Median: ${energyAnalyzer.median(monthlyData.map(_.energy))}")
-          println(s"Mode: ${energyAnalyzer.mode(monthlyData.map(_.energy))}")
-          println(s"Range: ${energyAnalyzer.range(monthlyData.map(_.energy))}")
-          println(s"Midrange: ${energyAnalyzer.midrange(monthlyData.map(_.energy))}")
-        } catch {
-          case t: Throwable => println("An error occurred. " + t.getMessage)
-        }
+        val readData = DataStorage.readDataFromCSV(fileName)
+        while (continue) {
+
+
+        println("Please select an option:")
+        println("1. Filter by energy type")
+        println("2. Sort by energy")
+        println("3. Search data")
+        println("4. Calculate statistical metrics")
+        println("0. Exit")
+
+        val option = scala.io.StdIn.readInt()
+        option match {
+          case 1 =>
+            println("Enter energy type:")
+            val energyType = scala.io.StdIn.readLine()
+            val filteredData = energyAnalyzer.filterByEnergyType(readData, energyType)
+            DataView.showDataByEnergyType(filteredData)
+          case 2 =>
+            DataView.showSortedData(readData)
+          case 3 =>
+            println("Enter keyword:")
+            val keyword = scala.io.StdIn.readLine()
+            DataView.showSearchResults(readData, keyword)
+
+          case 4 =>
+            println(s"Mean: ${energyAnalyzer.mean(readData.map(_.energy))}")
+            println(s"Median: ${energyAnalyzer.median(readData.map(_.energy))}")
+            println(s"Mode: ${energyAnalyzer.mode(readData.map(_.energy))}")
+            println(s"Range: ${energyAnalyzer.range(readData.map(_.energy))}")
+            println(s"Midrange: ${energyAnalyzer.midrange(readData.map(_.energy))}")
+          // Add more cases as needed...
+          case 0 =>
+            continue = false
+          case _ =>
+            println("Invalid option")
+        }}
+
 
       case 5 =>
         println("Enter file path")

@@ -4,25 +4,7 @@ import com.utils.DateUtils
 
 class EnergyAnalyzer {
 
-  /* following code are  modified to high order function */
-  /* switch to original version if wont work  */
-//   def analyzeHourlyData(hourlyData: Seq[HourProduction]): Seq[DailyProduction] = {
-//     hourlyData.groupBy(hp => DateUtils.dayFromDateTimestamp(hp.hour))
-//       .map { case (day, data) => DailyProduction(day, data.map(_.energy).sum) }
-//       .toSeq
-//   }
 
-//   def analyzeDailyData(dailyData: Seq[DailyProduction]): Seq[WeekProduction] = {
-//     dailyData.groupBy(dp => DateUtils.weekFromDateTimestamp(dp.day.toInt))
-//       .map { case (week, data) => WeekProduction(week, data.map(_.energy).sum) }
-//       .toSeq
-//   }
-
-//   def analyzeWeeklyData(weeklyData: Seq[WeekProduction]): Seq[MonthProduction] = {
-//     weeklyData.groupBy(wp => DateUtils.monthFromWeekTimestamp(wp.week.toInt))
-//       .map { case (month, data) => MonthProduction(month, data.map(_.energy).sum) }
-//       .toSeq
-//   }
 def analyzeViewerData(data: Seq[DataViewer]): Seq[DataViewer] = {
   // Your code to analyze the data
   // This is just an example, you will need to replace it with your own code
@@ -71,7 +53,17 @@ def analyzeViewerData(data: Seq[DataViewer]): Seq[DataViewer] = {
       (month, data) => MonthProduction(month, data.map(_.energy).sum)
     )
   }
+  def filterByEnergyType(data: Seq[HourProduction], energyType: String): Seq[HourProduction] = {
+    data.filter(_.energy_type == energyType)
+  }
 
+  def sortByEnergy(data: Seq[HourProduction]): Seq[HourProduction] = {
+    data.sortBy(_.energy)
+  }
+
+  def searchData(data: Seq[HourProduction], keyword: String): Seq[HourProduction] = {
+    data.filter(d => d.energy_type.contains(keyword) || d.equipment_id.contains(keyword))
+  }
   def mean(data: Seq[Double]): Double = data.sum / data.length
 
   def median(data: Seq[Double]): Double = {

@@ -1,8 +1,26 @@
-equipment_id,hour,energy_type,energy,equipment_status
-SP1,1683705600000,solar,150.0,operational
-SP1,1683709200000,solar,170.0,operational
-WT1,1683712800000,wind,180.0,operational
-WT1,1683720000000,wind,190.0,operational
-HP1,1629540000000,hydro,200.0,operational
-HP1,1683723600000,hydro,250.0,inoperational
-HP1,1683723600000,hydro,250.0,inoperational
+equipment_id,datetime,energy_type,energy_amount,status
+SP1,2021-08-21 02:00,solar,150.0,operational
+SP1,2021-08-21 03:00,solar,170.0,operational
+WT1,2021-08-21 13:00,wind,180.0,operational
+WT1,2021-08-21 13:00,wind,190.0,operational
+HP1,2021-08-21 13:00,hydro,200.0,operational
+HP1,2021-08-21 13:00,hydro,250.0,operational
+SP2,2021-08-22 05:46,solar,200.0,operational
+SP2,2021-08-22 20:40,solar,210.0,operational
+WT2,2021-08-23 09:26,wind,220.0,operational
+WT2,2021-08-23 20:33,wind,230.0,operational
+HP2,2021-08-24 13:13,hydro,240.0,operational
+HP2,2021-08-25 00:20,hydro,260.0,operational
+SP3,2021-08-25 17:06,solar,250.0,operational
+SP3,2021-08-26 08:00,solar,270.0,operational
+WT3,2021-08-26 20:46,wind,280.0,operational
+WT3,2021-08-27 07:53,wind,300.0,operational
+HP3,2021-08-28 00:33,hydro,300.0,operational
+HP3,2021-08-28 11:40,hydro,320.0,operational
+SP4,2021-08-29 04:26,solar,310.0,operational
+SP4,2021-08-29 19:20,solar,330.0,operational
+WT4,2021-08-30 08:06,wind,340.0,operational
+WT4,2021-08-30 19:13,wind,350.0,operational
+HP4,2021-08-31 11:53,hydro,360.0,operational
+HP4,2021-08-31 23:00,hydro,380.0,operational
+HP4,2021-08-31 23:00,hydro,380.0,operational
