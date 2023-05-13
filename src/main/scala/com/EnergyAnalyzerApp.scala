@@ -28,6 +28,7 @@ object EnergyAnalyzerApp extends App {
     option match {
       case 1 =>
         alertSystem.checkStatus(hourlyData)
+        alertSystem.checkLowEnergy(hourlyData)
 
       case 2 =>
         println("Please enter the new data in the format:\nequipment_id,timestamp,energy_type,energy_output,equipment_status")

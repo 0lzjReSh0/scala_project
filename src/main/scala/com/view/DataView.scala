@@ -9,10 +9,38 @@ import java.io.PrintWriter
 import java.io.File
 import com.utils.DataStorage
 import com.models.HourProduction
+import java.time.LocalDate
+import java.time.Month
 object DataView {
+
+
+
   def showData(data: Seq[MonthProduction]): Unit = {
-    data.foreach(record => println(s"Month: ${record.month}, Energy: ${record.energy}"))
+    if (data.isEmpty) {
+      println("No data to show.")
+      return
+    }
+
+    println("Showing total energy production for each month:")
+
+    data.foreach(record => {
+      val month = LocalDate.of(1970, Month.JANUARY, 1).plusMonths(record.month).getMonth
+      println(s" - ${month}: ${record.energy} units")
+    })
+
+    val totalEnergy = data.map(_.energy).sum
+    val avgEnergy = totalEnergy / data.length
+    val minEnergy = data.map(_.energy).min
+    val maxEnergy = data.map(_.energy).max
+
+    println(s"\nSummary:")
+    println(s" - Total energy: $totalEnergy units")
+    println(s" - Average energy per month: $avgEnergy units")
+    println(s" - Minimum energy in a month: $minEnergy units")
+    println(s" - Maximum energy in a month: $maxEnergy units")
   }
+
+
   def showViewerData(data: Seq[DataViewer]): Unit = {
     data.foreach(record => println(s"Equipment ID: ${record.equipment}, Hour: ${record.datetime}, Energy Type: ${record.energy_type}, Energy: ${record.energy}, Equipment Status: ${record.status}"))
   }
